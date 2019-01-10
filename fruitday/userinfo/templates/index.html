@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>天天果园首页</title>
+    <!-- 引入css -->
+    <link rel="stylesheet" href="/static/css/index.css" type="text/css">
+    <script src="/static/js/jquery-1.11.3.js"></script>
+    {% block js %}
+    {% endblock %}
+</head>
+<body>
+    <div id="container">
+        <!--1. 导航 -->
+        <div id="nav">
+            <ul class="rightNav">
+                {% if request.session.user_name %}
+                    <li>欢迎您：<a href="" target="_blank">{{ request.session.user_name }}</a></li>
+                    <li><a href="{% url 'lgt' %}" target="_blank">[退出]</a></li>
+                {% else %}
+                    <li><a href="{% url 'lg' %}" target="_blank">[登陆]</a></li>
+                    <li><a href="{% url 'reg' %}" target="_blank">[注册,有惊喜]</a></li>
+                {% endif %}
+                <li><b></b>果园公告</li>
+                <li><b></b>卷卡兑换</li>
+                <li><b></b>手机果园</li>
+            </ul>
+            <ol class="leftNav">
+                <li><span>上海</span><u></u></li>
+                <li>满百包邮(环郊内)</li>
+                <li><a>星夜达</a></li>
+            </ol>
+        </div>
+        <!-- 2. banner / wrapper -->
+        <div id="wrapper">
+            <!-- 图片轮播 -->
+            <div class="banner">
+                <img src="/static/img/banner1.jpg" id="d1">
+                <img src="/static/img/banner2.jpg" id="d2">
+                <h2 id="h1">①</h2>
+                <h2 id="h2">②</h2>
+                <!-- 图片下标 -->
+                <!-- <ul class="imgNav">
+                    <li>1</li>
+                    <li>2</li>
+                </ul> -->
+                <script src="/static/js/index.js"></script>
+            </div>
+        </div>
+
+        <!-- 3. 小图推荐 -->
+        <div id="adv">
+            <img src="/static/img/1.jpg">
+            <img src="/static/img/2.jpg">
+            <img src="/static/img/3.jpg">
+            <img src="/static/img/4.jpg" class="lastimg">
+
+
+        </div>
+
+        {% block main %}
+        <!-- 4. 主体信息 -->
+        <div id="main">
+            <!-- 第一个分类（所有分类样式与结构都可以复用） -->
+            <div class="goodsType">
+                <!-- 1.顶部标题 -->
+                <p class="goodsClass">
+                    <img src="/static/img/t4.png">
+                    <a href="#">更多</a>
+                </p>
+                <!-- 2. 商品信息展示 -->
+                <ul>
+                    {% for goodt in good_list %}
+                        <ul>
+                            <li style="color: olivedrab;font-size: 16px;font-weight: bolder">{{ goodt }}</li>
+                            {% for good in goodt.goods_set.all %}
+                                <li class="item">
+                                    <!-- 商品大图展示 -->
+                                    <div class="imgInfo">
+                                        <a href="desc/{{ good.id }}/"><img src="{{ good.picture}}"></a>
+                                    </div>
+
+                                    <!-- 商品信息展示 -->
+                                    <div class="content">
+                                        <!-- 购物车图标 -->
+                                        <a href="cart_in/?id={{ good.id }}"><img src="/static/img/cart.png"></a>
+                                        <p>{{ good.title }}</p>
+                                        <span>￥{{ good.price }}/{{ good.unit }}</span>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="gouwuche">
+        <a href="{% url 'cart' %}">
+            <img src="/static/img/cart.png">
+            <h3>购物车</h3>
+        </a>
+    </div>
+    {% endblock %}
+</body>
+</html>

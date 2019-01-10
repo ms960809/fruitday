@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>天天果园购物车</title>
+    <!-- 引入css -->
+    <link rel="stylesheet" href="/static/css/cart.css" type="text/css">
+    <script src="/static/js/jquery-1.11.3.js"></script>
+    <script src="/static/js/cart.js"></script>
+    <script src="/static/js/index.js"></script>
+    <script>
+        $(function () {
+            $('.action input').click(function () {
+                console.log('删除了哈')
+                 $.ajax({
+                    url:{% url 'cartout' %},
+                    type:'get',
+                    data:'id='+$('.g-item>input').val(),
+                    success:function (data) {
+                        console.log('ok')
+                    }
+                })
+                console.log('删除了')
+            })
+
+        })
+    </script>
+</head>
+<body>
+    <div id="container">
+        <!--1. 导航 -->
+        <div id="nav">
+            <ul class="rightNav">
+                {% if request.session.user_name %}
+                    <li>欢迎您：<a href="" target="_blank">{{ request.session.user_name }}</a></li>
+                    <li><a href="{% url 'lgt' %}" target="_self">[退出]</a></li>
+                {% else %}
+                    <li><a href="{% url 'lg' %}" target="_self">[登陆]</a></li>
+                    <li><a href="{% url 'reg' %}" target="_self">[注册,有惊喜]</a></li>
+                {% endif %}
+                <li><b></b>果园公告</li>
+                <li><b></b>卷卡兑换</li>
+                <li><b></b>手机果园</li>
+            </ul>
+            <ol class="leftNav">
+                <li><span>上海</span><u></u></li>
+                <li>满百包邮(环郊内)</li>
+                <li><a>星夜达</a></li>
+            </ol>
+        </div>
+        <!-- 2. banner / wrapper -->
+        <div id="wrapper">
+            <!-- 图片轮播 -->
+            <div class="banner">
+                <img src="/static/img/banner1.jpg" id="d1">
+                <img src="/static/img/banner2.jpg" id="d2">
+                <h2 id="h1">①</h2>
+                <h2 id="h2">②</h2>
+                <!-- 图片下标 -->
+                <!-- <ul class="imgNav">
+                    <li>1</li>
+                    <li>2</li>
+                </ul> -->
+            </div>
+        </div>
+
+        <!-- 3. 小图推荐 -->
+        <div id="adv">
+            <img src="/static/img/1.jpg">
+            <img src="/static/img/2.jpg">
+            <img src="/static/img/3.jpg">
+            <img src="/static/img/4.jpg" class="lastimg">
+        </div>
+        <!-- 4. 主体信息 -->
+        <div id="main">
+            <!-- 4.1购物车标题 -->
+            <div class="title">
+                <p class="check-box">
+                    <input id="checkall" type="checkbox" name="checkall">
+                    全选
+                </p>
+                <p class="goods">商品</p>
+                <p class="price">单价</p>
+                <p class="count">数量</p>
+                <p class="t-sum">总价</p>
+                <p class="action">操作</p>
+            </div>
+            <!-- 4.2购物车内容区域 -->
+            <div class="good-content">
+                {% for cart in carts %}
+                    <div class="g-item">
+                        <p class="check-box">
+                            <input type="checkbox" name="check">
+                            <img src="/{{ cart.good.picture }}">
+                        </p>
+                        <p class="goods">
+                            {{ cart.good.title }}
+                        </p>
+                        <p class="price">&yen;{{ cart.good.price }}</p>
+                        <p class="count">
+                            <a href="javascript:void(0)" class="decrement">-</a>
+                            <input type="text" name="countText" value="{{ cart.count }}">
+                            <a href="javascript:void(0)" class="increment">+</a>
+                        </p>
+                        <p class="t-sum">&yen;{{ cart.good.price }}</p>
+                        <p class="action">
+                            <a href="javascript:void(0)"><input type="button" value="移除"></a>
+                        </p>
+                        <input type="hidden" value="{{ cart.id }}">
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- 5.购物车底部工具栏 -->
+        <div id="d2">
+            <div id="cart-toolbar">
+                <p class="submit-count">
+                    已选择<span>0</span>件商品
+                </p>
+                <p class="submit-price">
+                    总价：<span>&yen;0</span>
+                </p>
+                <p class="submit-btn">去结算</p>
+            </div>
+        </div>
+    </div>
+    <div id="gouwuche">
+        <a href="{% url '/' %}" target="_self">
+            <h2 style="background: pink;">首页</h2>
+        </a>
+    </div>
+</body>
+</html>
