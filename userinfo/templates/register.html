@@ -1,0 +1,82 @@
+{% extends 'login.html' %}
+
+{% block class %}
+    .a2_you{
+        position:absolute;
+        top:-54px;
+        right:0px;
+
+    }
+{% endblock %}
+
+{% block title %}
+    <title>会员注册</title>
+{% endblock %}
+
+
+
+{% block t1 %}
+    <div class="a1">
+        会员注册
+    </div>
+{% endblock %}
+
+
+
+{% block t2 %}
+    <div class="button1"><a href="{% url 'lg' %}">会员登录</a></div>
+{% endblock %}
+
+
+
+{% block login %}
+    <div class="a2_you">
+
+        <form action="{% url 'regs' %}" method="post">
+            {% csrf_token %}
+            <table>
+                {{ message }}
+                <tr>
+                    <td class="td-1">手机号</td>
+                    <td class="td-2"></td>
+                    <td colspan="2" class="td-3"><input type="text" name="phone" id="text-1" placeholder="请输入11位号码"
+                    oninput = "value=value.replace(/[^\d]/g,'')"></td>
+                </tr>
+                <tr>
+                    <td class="td-1">邮箱</td>
+                    <td class="td-2"></td>
+                    <td colspan="2" class="td-3"><input type="email" name="email" id="text-2"></td>
+                </tr>
+                <tr>
+                    <td class="td-1">用户名</td>
+                    <td class="td-2"></td>
+                    <td colspan="2" class="td-3"><input type="text" name="name" id="text-2" placeholder="请输入6-20位数字或字符"
+                    onkeyup="value=value.replace(/[\W]/g,'') "
+                    onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"></td>
+                </tr>
+
+                <tr>
+                    <td class="td-1">密码</td>
+                    <td class="td-2"></td>
+                    <td colspan="2" class="td-3">
+                        <input type="password" name="pwd1"  id="text-2"><span style="font-size: 10px">
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td class="td-1">确认密码</td>
+                    <td class="td-2"></td>
+                    <td colspan="2" class="td-3"><input type="password" name="pwd2" id="text-2"></td>
+                </tr>
+
+                <tr>
+                    <td class="td-1"></td>
+                    <td class="td-2"></td>
+                    <td class="td-3"><input type="submit" title="登录" value="立即注册" id="button2"></td>
+                    <td class="td-4"><a href="{% url 'lg' %}"><input type="button" title="注册" value="会员登录" id="button3"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+{% endblock %}
