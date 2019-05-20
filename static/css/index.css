@@ -1,0 +1,196 @@
+/* 清除浏览器默认样式 */
+body,h1,h2,h3,h4,h5,h6,ul,ol,p{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* 设置页面基础样式 */
+body{
+    font: 12px '微软雅黑','黑体';
+    color: #9a9a9a;
+}
+a{
+    text-decoration: none;
+    color: #9a9a9a;
+    cursor: pointer;
+}
+a:hover{
+    color: #64a131;
+}
+
+/* 行内块元素的垂直对齐 */
+img{
+    vertical-align: bottom;
+}
+
+/* 外围结构标签的样式 */
+#container{
+    /* div - > d1 d2 d3 d4 */
+    width: 990px;
+    margin: 0 auto;
+}
+
+/* 1. 导航栏样式 */
+#nav{
+    height: 30px;
+    background: #eee;
+    line-height: 30px;
+}
+/* 1.1 右侧导航 */
+.rightNav{
+    float: right;
+}
+.rightNav>li{
+    float: left;
+    padding: 0 5px;
+    /* border: 1px solid black;
+    height: 15px;
+    margin-top: 7px;
+    line-height: 15px; */
+    /* 最后一个特殊处理，不需要边框 */
+}
+.rightNav>li>b{
+    border-left: 1px solid #9a9a9a;
+    margin-right: 10px;
+} 
+
+
+/* 1.2 左侧导航 */
+.leftNav>li{
+    float: left;
+    padding-left: 10px;
+} 
+.leftNav u{
+    position: relative;
+    top:4px;
+    display: inline-block;
+    height: 0px;
+    width: 0px;
+    border: 6px solid transparent;
+    border-top: 6px solid rgb(122, 120, 120);
+    line-height: 30px;
+}
+
+/* 2.横幅wrapper */
+#wrapper{
+    margin: 15px 0;
+    position: relative;
+}
+#wrapper img{
+    width: 100%;
+}
+/* 只有第一个张图片显示，其他图片都隐藏 */
+.banner img:not(:first-child){
+    display: none;
+}
+/* 老师轮播图下标
+.imgNav{
+    position: absolute;
+    bottom: 20px ;
+    right: 20px;
+}
+.imgNav>li{
+    width: 15px;
+    height: 15px;
+    float: left;
+    margin: 0 10px;
+    border-radius: 50%;
+    background: gray;
+    text-align: center;
+    line-height: 15px;
+    /* cursor: pointer; */
+    /* color: white;
+}
+.imgNav>li:first-child{
+    background: red;
+} */
+
+
+
+
+/* 自己写的轮播图下标 */
+.banner{
+    position: relative;
+}
+.banner>#h1{
+    position: absolute;
+    top:180px;
+    left: 480px;
+    cursor: pointer;
+}
+.banner>#h2{
+    position: absolute;
+    top:180px;
+    left: 500px;
+    cursor: pointer;
+
+}
+/* 3. 推荐 */
+#adv{
+    /* 解决行内元素水平方向上换行导致的间隙问题 */
+    font-size: 0px;
+}
+#adv>img{
+    display: inline-block;
+    width: 240px;
+    margin-right: 10px;
+}
+#adv>.lastimg{
+    margin: 0px;
+}
+
+/* 4. 主体信息 */
+#main{
+    margin-top:25px;
+
+}
+/* p元素设置样式 */
+#main .goodsClass{
+    border-top:1px solid #ccc;
+    padding-top: 15px;
+    margin-bottom: 10px;
+}
+/* 超链接设置样式 */
+.goodsClass>a{
+    float: right;
+    color: #333;
+}
+
+/* 信息展示  列表项*/
+#main .item{
+    width: 188px;
+    margin-right:10px; 
+    margin-bottom: 10px;
+    float: left;
+}
+#main .item .imgInfo{
+    width: 188px;
+    height: 190px;
+    overflow: hidden;
+}
+#main .item .imgInfo img{
+    width: 188px;
+    transition: .3s;
+}
+#main .item .imgInfo img:hover{
+    transform: scale(1.5);
+}
+#main .item .content a{
+    float: right;
+}
+
+#gouwuche{
+    background:pink;
+    position: fixed;
+    bottom: 50px;
+    right: 10px;
+    height: 48px;
+    width: 48px;
+    cursor: pointer;
+    border-radius: 30%;
+    text-align: center;
+}
+#gouwuche img{
+    margin: 0 auto;
+}
